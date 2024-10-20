@@ -1,0 +1,12 @@
+pipeline {
+    agent {label "maven21"}
+    stages {
+        stage('Build') {
+          steps {
+            container('maven') {
+              sh 'mvn --version'
+                }
+            }
+        }
+    }
+}

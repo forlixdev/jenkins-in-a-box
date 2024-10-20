@@ -1,0 +1,20 @@
+pipeline {
+    agent {label "maven21"}
+    stages {
+        stage('Build') {
+          steps {
+            container('maven') {
+              sh 'mvn test'
+              publishHTML target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'target/karate-reports',
+                reportFiles: 'karate-summary.html',
+                reportName: 'Karate Report'
+                    ]
+                }
+            }
+        }
+    }
+}
